@@ -1,0 +1,12 @@
+eap-domain:
+  image: luszczynski/eap-domain
+eap-host01:
+  image: luszczynski/eap-host
+  links:
+    - eap-domain
+eap-host02:
+  image: luszczynski/eap-host
+  links:
+    - eap-domain
+ews:
+  image: luszczynski/ews
