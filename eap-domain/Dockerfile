@@ -4,10 +4,6 @@ MAINTAINER Gustavo Luszczynski
 
 USER jboss
 
-#RUN $EAP_HOME/bin/domain.sh --admin-only & \
-#	sleep 5 && \
-#	$EAP_HOME/bin/jboss-cli.sh --connect --controller=localhost "deploy /opt/jboss/eap/contador.war --disabled" && \
-#	$EAP_HOME/bin/jboss-cli.sh --connect --controller=localhost "deploy /opt/jboss/eap/contador2.war --disabled"
 COPY support/eap.cli support/post.cli /tmp/
 RUN $EAP_HOME/bin/jboss-cli.sh --file=/tmp/eap.cli
 
