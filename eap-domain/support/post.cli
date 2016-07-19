@@ -1,0 +1,23 @@
+# Add server config for backend1 and backend2 using 100 and 200 binding port offset.
+/host=host01/server-config=backend1:add(group=backend-servers, socket-binding-port-offset=0)
+/host=host02/server-config=backend2:add(group=backend-servers, socket-binding-port-offset=0)
+
+# Add a system-property called server.name to the server config. This system-property is used by the application.
+/host=host01/server-config=backend1/system-property=server.name:add(boot-time=false, value=backend1)
+/host=host02/server-config=backend2/system-property=server.name:add(boot-time=false, value=backend2)
+
+# Add a load-balancer server to the load-balancer group
+/host=frontend/server-config=load-balancer:add(group=load-balancer)
+
+# Deploy the  application to the serviers in the backend-server group
+# deploy {{ ansible_user_dir }}/clustering-demo.war --server-groups=backend-servers
+
+# Configure the servers to be auto-started
+/host=host01/server-config=backend1:write-attribute(name=auto-start,value=true)
+/host=host02/server-config=backend2:write-attribute(name=auto-start,value=true)
+/host=frontend/server-config=load-balancer:write-attribute(name=auto-start,value=true)
+
+## The following lines sets the node identifier for the servers
+/host=host01/server-config=backend1/system-property=jboss.tx.node.id:add(boot-time=true, value=host01)
+/host=host02/server-config=backend2/system-property=jboss.tx.node.id:add(boot-time=true, value=host02)
+/host=frontend/server-config=load-balancer/system-property=jboss.tx.node.id:add(boot-time=true, value=lb-01)

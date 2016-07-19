@@ -1,24 +1,21 @@
-FROM luszczynski/jdk:1.8.0_65
+FROM luszczynski/jdk:v1.8.0_92
 
-MAINTAINER Gustavo Luszczynski 
+MAINTAINER Gustavo Luszczynski
 
-ENV EAP_PATCH_NAME jboss-eap-6.4.5-patch.zip
-ENV EAP_ZIP_NAME jboss-eap-6.4.0.zip
+ENV EAP_ZIP_NAME jboss-eap-7.0.0.zip
 ENV INSTALLDIR_EAP /opt/jboss/eap
-ENV EAP_HOME $INSTALLDIR_EAP/jboss-eap-6.4
+ENV EAP_HOME $INSTALLDIR_EAP/jboss-eap-7.0
 
 RUN mkdir -p $INSTALLDIR_EAP && \
 	chown -R jboss.jboss  $HOME $INSTALLDIR_EAP
 
-COPY software/$EAP_ZIP_NAME software/$EAP_PATCH_NAME /tmp/
+COPY software/$EAP_ZIP_NAME /tmp/
 
-RUN chown jboss /tmp/$EAP_ZIP_NAME /tmp/$EAP_PATCH_NAME
+RUN chown jboss /tmp/$EAP_ZIP_NAME
 
 USER jboss
 
-RUN	unzip /tmp/$EAP_ZIP_NAME -d $INSTALLDIR_EAP && \
-	$INSTALLDIR_EAP/jboss-eap-6.4/bin/jboss-cli.sh --user=admin --password=redhat@123 --controller=localhost "patch apply /tmp/$EAP_PATCH_NAME" && \
-	rm /tmp/$EAP_ZIP_NAME /tmp/$EAP_PATCH_NAME
+RUN	unzip /tmp/$EAP_ZIP_NAME -d $INSTALLDIR_EAP && rm /tmp/$EAP_ZIP_NAME
 
 COPY support/*.properties $EAP_HOME/standalone/configuration/
 COPY support/*.properties $EAP_HOME/domain/configuration/

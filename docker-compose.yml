@@ -1,12 +1,37 @@
-eap-domain:
-  image: luszczynski/eap-domain
-eap-host01:
-  image: luszczynski/eap-host
-  links:
-    - eap-domain
-eap-host02:
-  image: luszczynski/eap-host
-  links:
-    - eap-domain
-ews:
-  image: luszczynski/ews
+version: '2'
+
+services:
+  eap-base:
+    image: luszczynski/eap-base:latest
+    build:
+      context: ./eap-base
+
+  eap-domain:
+    image: luszczynski/eap-domain
+    hostname: eap-domain
+    build:
+      context: ./eap-domain
+
+  eap-host01:
+    image: luszczynski/eap-host
+    hostname: host01
+    build:
+      context: ./eap-host
+    depends_on:
+      - eap-domain
+
+  eap-host02:
+    image: luszczynski/eap-host
+    hostname: host02
+    build:
+      context: ./eap-host
+    depends_on:
+      - eap-domain
+
+  eap-host03:
+    image: luszczynski/eap-host
+    hostname: frontend
+    build:
+      context: ./eap-host
+    depends_on:
+      - eap-domain
