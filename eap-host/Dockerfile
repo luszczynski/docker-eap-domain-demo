@@ -12,4 +12,4 @@ USER jboss
 
 EXPOSE 8080 9990 9999
 
-CMD ["/opt/jboss/eap/jboss-eap-7.0/bin/domain.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0", "-bunsecure", "0.0.0.0", "--host-config=host-slave.xml", "--master-address=eap-domain"]
+CMD ["sh", "-c","/opt/jboss/eap/jboss-eap-7.0/bin/domain.sh -b $HOSTNAME -bmanagement $HOSTNAME -bunsecure $HOSTNAME --host-config=host-slave.xml --master-address=eap-domain"]

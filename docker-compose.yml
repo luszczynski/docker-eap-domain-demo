@@ -12,7 +12,7 @@ services:
     build:
       context: ./eap-domain
 
-  eap-host01:
+  host01:
     image: luszczynski/eap-host
     hostname: host01
     build:
@@ -20,7 +20,7 @@ services:
     depends_on:
       - eap-domain
 
-  eap-host02:
+  host02:
     image: luszczynski/eap-host
     hostname: host02
     build:
@@ -28,7 +28,7 @@ services:
     depends_on:
       - eap-domain
 
-  eap-host03:
+  frontend:
     image: luszczynski/eap-host
     hostname: frontend
     build:

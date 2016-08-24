@@ -239,7 +239,7 @@
             </subsystem>
             <subsystem xmlns="urn:jboss:domain:threads:1.1"/>
             <subsystem xmlns="urn:jboss:domain:transactions:1.5">
-                <core-environment>
+                <core-environment node-identifier="${jboss.node.name}">
                     <process-id>
                         <uuid/>
                     </process-id>
@@ -402,7 +402,7 @@
                     </replicated-cache>
                     <!--
                       ~  Clustered cache used internally by EJB subsytem for managing the client-mapping(s) of
-                      ~                 the socketbinding referenced by the EJB remoting connector 
+                      ~                 the socketbinding referenced by the EJB remoting connector
                       -->
                     <replicated-cache name="remote-connector-client-mappings" mode="SYNC" batching="true"/>
                     <distributed-cache name="dist" mode="ASYNC" batching="true" l1-lifespan="0">
@@ -539,7 +539,7 @@
             </subsystem>
             <subsystem xmlns="urn:jboss:domain:threads:1.1"/>
             <subsystem xmlns="urn:jboss:domain:transactions:1.5">
-                <core-environment>
+                <core-environment node-identifier="${jboss.node.name}">
                     <process-id>
                         <uuid/>
                     </process-id>
@@ -861,7 +861,7 @@
             </subsystem>
             <subsystem xmlns="urn:jboss:domain:threads:1.1"/>
             <subsystem xmlns="urn:jboss:domain:transactions:1.5">
-                <core-environment>
+                <core-environment node-identifier="${jboss.node.name}">
                     <process-id>
                         <uuid/>
                     </process-id>
@@ -1030,7 +1030,7 @@
                     </replicated-cache>
                     <!--
                       ~  Clustered cache used internally by EJB subsytem for managing the client-mapping(s) of
-                      ~                 the socketbinding referenced by the EJB remoting connector 
+                      ~                 the socketbinding referenced by the EJB remoting connector
                       -->
                     <replicated-cache name="remote-connector-client-mappings" mode="SYNC" batching="true"/>
                     <distributed-cache name="dist" mode="ASYNC" batching="true" l1-lifespan="0">
@@ -1280,7 +1280,7 @@
             </subsystem>
             <subsystem xmlns="urn:jboss:domain:threads:1.1"/>
             <subsystem xmlns="urn:jboss:domain:transactions:1.5">
-                <core-environment>
+                <core-environment node-identifier="${jboss.node.name}">
                     <process-id>
                         <uuid/>
                     </process-id>
@@ -1311,13 +1311,13 @@
         </profile>
     </profiles>
     <!--
-      ~ 
+      ~
       ~          Named interfaces that can be referenced elsewhere in the configuration. The configuration
       ~          for how to associate these logical names with an actual network interface can either
       ~          be specified here or can be declared on a per-host basis in the equivalent element in host.xml.
-      ~ 
+      ~
       ~          These default configurations require the binding specification to be done in host.xml.
-      ~     
+      ~
       -->
     <interfaces>
         <interface name="management"/>
