@@ -1,12 +1,27 @@
-eap-domain:
-  image: luszczynski/eap-domain
-eap-host01:
-  image: luszczynski/eap-host
-  links:
-    - eap-domain
-eap-host02:
-  image: luszczynski/eap-host
-  links:
-    - eap-domain
-ews:
-  image: luszczynski/ews
+version: "3.9"
+services:
+
+  eap-domain:
+    container_name: eap-domain
+    image: luszczynski/eap-domain
+    ports:
+      - "9990:9990"
+
+  eap-host01:
+    container_name: eap-host01
+    image: luszczynski/eap-host
+    links:
+      - eap-domain
+    depends_on:
+      - eap-domain
+
+  eap-host02:
+    container_name: eap-host02
+    image: luszczynski/eap-host
+    links:
+      - eap-domain
+    depends_on:
+      - eap-domain
+      
+# ews:
+#   image: luszczynski/ews
